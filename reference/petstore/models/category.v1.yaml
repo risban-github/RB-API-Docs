@@ -1,0 +1,10 @@
+title: Category
+type: object
+description: ''
+x-tags:
+  - Pets
+properties:
+  name:
+    type: string
+required:
+  - name

@@ -1,0 +1,14 @@
+title: meta
+type: object
+x-tags:
+  - Common
+properties:
+  message:
+    type: string
+    description: ''
+    example: OK
+  current_date:
+    type: string
+    format: date-time
+    example: '2020-05-09T22:21:56.677Z'
+    description: ''

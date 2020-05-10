@@ -1,0 +1,166 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Risban API Reference Docs
+  license: {}
+  description: ''
+  contact:
+    name: Rakesh
+    email: rakesh@risban.com
+servers:
+  - url: 'https://dev.risban.com/api/v1'
+    description: Development
+  - description: Staging
+    url: 'https://stage.risban.com/api/v1'
+  - url: 'https://risban.com/api/v1'
+    description: Live
+paths:
+  /pets:
+    get:
+      summary: List all pets
+      operationId: listPets
+      tags:
+        - pets
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: A paged array of pets
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: ./models/pet.v1.yaml
+              examples:
+                example-1: {}
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../common/models/error.v1.yaml
+    post:
+      summary: Create a pet
+      operationId: createPets
+      tags:
+        - pets
+      responses:
+        '201':
+          description: Null response
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../common/models/error.v1.yaml
+  '/pets/{petId}':
+    get:
+      summary: Info for a specific pet
+      operationId: showPetById
+      tags:
+        - pets
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          description: The id of the pet to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: ./models/pet.v1.yaml
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../common/models/error.v1.yaml
+  /user/login:
+    post:
+      summary: User login
+      operationId: post-user-login
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '':
+                    $ref: ./models/login.v1.yaml
+      description: "This is an API to login using registered email and password. \n\nOn successful validation of your email and password, Risban generates access_token which you need to put in the header to use other APIs."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: john.smith@test-risban.com
+                password:
+                  type: string
+                  format: password
+                  example: 'HelloWorld!23'
+                  pattern: '^[A-Za-z0-9 -_]+'
+              required:
+                - email
+                - password
+      tags:
+        - Users
+  /user/me:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '':
+                    $ref: ./models/user-me.v1.yaml
+      operationId: get-user-me
+      description: Get own detail after login
+      parameters:
+        - schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIwZGJjNTNkYi0zYTI2LTRjYzEtOWJjNy1hZTg4OWM3ODk0NDEiLCJlbWFpbElkIjoicmFrZXNoQHJpc2Jhbi5jb20iLCJmaXJzdE5hbWUiOiJSYWtlc2giLCJsYXN0TmFtZSI6IkJva2luYWxhIiwicGhvbmUiOiIrOTEgOTAxNzI1MjI5MSIsInBhc3N3b3JkIjoiMzUxNjVkMzUzODRmMTAyYzVmNGRiMjE4OWUzOGMzYmEzYjMyZjNlYzFjMTU0YTQzMzUxNjVkMzUzODRmIiwiaXNFbWFpbFZlcmlmZWQiOnRydWUsImlzT25ib2FyZGVkIjp0cnVlLCJsYXN0VXBkYXRlZERhdGUiOiIyMDIwLTA0LTA2VDE1OjAxOjA5LjUxMFoiLCJsYXN0VXBkYXRlZEJ5IjoiU3lzdGVtIiwiaXNBY3RpdmUiOnRydWUsImNyZWF0ZWREYXRlIjoiMjAyMC0wNC0wNlQxNTowMTowOS41MTBaIiwiY3JlYXRlZEJ5IjoiU3lzdGVtIiwiY3JlYXRlZE9uIjoiMjAyMC0wNS0wOVQyMjoyMTo1Ni42NzZaIiwiaWF0IjoxNTg5MDYyOTE2fQ.oBpJiDEcpn5MFKO_mLlByLGlJJ_2JnJ65hZRL9GiW4k
+          in: header
+          name: Authorization
+          description: 'Bearer {{access_token}}'
+          required: true
+          style: 'Bearer {{access_token}}'
+components:
+  schemas:
+    Pets:
+      type: array
+      items:
+        $ref: ./models/pet.v1.yaml
+      x-tags:
+        - Pets
+      title: Pets
+      description: A list of pets.
+  securitySchemes:
+    API Key - 1:
+      name: API Key
+      type: apiKey
+      in: query

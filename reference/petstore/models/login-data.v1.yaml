@@ -1,0 +1,32 @@
+title: data
+type: object
+x-tags:
+  - Pets
+properties:
+  id:
+    type: string
+    format: uuid
+    example: 0dbc53db-3a26-4cc1-9bc7-ae889c789441
+  email:
+    type: string
+    format: email
+    example: john.smith@test-risban.com
+    description: ''
+  first_name:
+    type: string
+    example: John
+    pattern: '^[A-Za-z]+'
+    description: ''
+  middle_name:
+    type: string
+    pattern: '^[A-Za-z]+'
+  last_name:
+    type: string
+    pattern: '^[A-Za-z]+'
+  access_token:
+    type: string
+    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIwZGJjNTNkYi0zYTI2LTRjYzEtOWJjNy1hZTg4OWM3ODk0NDEiLCJlbWFpbElkIjoicmFrZXNoQHJpc2Jhbi5jb20iLCJmaXJzdE5hbWUiOiJSYWtlc2giLCJsYXN0TmFtZSI6IkJva2luYWxhIiwicGhvbmUiOiIrOTEgOTAxNzI1MjI5MSIsInBhc3N3b3JkIjoiMzUxNjVkMzUzODRmMTAyYzVmNGRiMjE4OWUzOGMzYmEzYjMyZjNlYzFjMTU0YTQzMzUxNjVkMzUzODRmIiwiaXNFbWFpbFZlcmlmZWQiOnRydWUsImlzT25ib2FyZGVkIjp0cnVlLCJsYXN0VXBkYXRlZERhdGUiOiIyMDIwLTA0LTA2VDE1OjAxOjA5LjUxMFoiLCJsYXN0VXBkYXRlZEJ5IjoiU3lzdGVtIiwiaXNBY3RpdmUiOnRydWUsImNyZWF0ZWREYXRlIjoiMjAyMC0wNC0wNlQxNTowMTowOS41MTBaIiwiY3JlYXRlZEJ5IjoiU3lzdGVtIiwiY3JlYXRlZE9uIjoiMjAyMC0wNS0wOVQyMjoyMTo1Ni42NzZaIiwiaWF0IjoxNTg5MDYyOTE2fQ.oBpJiDEcpn5MFKO_mLlByLGlJJ_2JnJ65hZRL9GiW4k
+    description: ''
+  refresh_token:
+    type: string
+    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIwZGJjNTNkYi0zYTI2LTRjYzEtOWJjNy1hZTg4OWM3ODk0NDEiLCJlbWFpbElkIjoicmFrZXNoQHJpc2Jhbi5jb20iLCJmaXJzdE5hbWUiOiJSYWtlc2giLCJsYXN0TmFtZSI6IkJva2luYWxhIiwicGhvbmUiOiIrOTEgOTAxNzI1MjI5MSIsInBhc3N3b3JkIjoiMzUxNjVkMzUzODRmMTAyYzVmNGRiMjE4OWUzOGMzYmEzYjMyZjNlYzFjMTU0YTQzMzUxNjVkMzUzODRmIiwiaXNFbWFpbFZlcmlmZWQiOnRydWUsImlzT25ib2FyZGVkIjp0cnVlLCJsYXN0VXBkYXRlZERhdGUiOiIyMDIwLTA0LTA2VDE1OjAxOjA5LjUxMFoiLCJsYXN0VXBkYXRlZEJ5IjoiU3lzdGVtIiwiaXNBY3RpdmUiOnRydWUsImNyZWF0ZWREYXRlIjoiMjAyMC0wNC0wNlQxNTowMTowOS41MTBaIiwiY3JlYXRlZEJ5IjoiU3lzdGVtIiwiY3JlYXRlZE9uIjoiMjAyMC0wNS0wOVQyMjoyMTo1Ni42NzZaIiwiaWF0IjoxNTg5MDYyOTE2fQ.oBpJiDEcpn5MFKO_mLlByLGlJJ_2JnJ65hZRL9GiW4k

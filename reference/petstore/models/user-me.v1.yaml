@@ -1,0 +1,9 @@
+title: user-me
+type: object
+x-tags:
+  - Pets
+properties:
+  meta:
+    $ref: ./meta.v1.yaml
+  data:
+    $ref: ./user-me-data.v1.yaml

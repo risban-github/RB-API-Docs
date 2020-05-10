@@ -1,0 +1,36 @@
+title: user-me-data
+type: object
+x-tags:
+  - Pets
+description: ''
+properties:
+  id:
+    type: string
+    format: uuid
+    example: 0dbc53db-3a26-4cc1-9bc7-ae889c789441
+  email:
+    type: string
+    format: email
+    example: john.smith@test-risban.com
+  first_name:
+    type: string
+  middle_name:
+    type: string
+  last_name:
+    type: string
+  phone:
+    type: string
+  verified_email:
+    type: boolean
+  last_updated_date:
+    type: string
+    format: date
+  last_updated_by:
+    type: string
+  created_date:
+    type: string
+    format: date
+  created_by:
+    type: string
+x-examples:
+  example-1: {}
