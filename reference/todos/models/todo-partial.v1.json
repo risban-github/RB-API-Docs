@@ -18,5 +18,8 @@
   ],
   "x-tags": [
     "Todos"
-  ]
+  ],
+  "x-examples": {
+    "example-1": {}
+  }
 }

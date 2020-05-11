@@ -7,3 +7,4 @@ properties:
     $ref: ./meta.v1.yaml
   data:
     $ref: ./login-data.v1.yaml
+description: ''

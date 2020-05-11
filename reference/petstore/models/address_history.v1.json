@@ -1,0 +1,30 @@
+{
+  "title": "address_history",
+  "type": "object",
+  "properties": {
+    "address_line1": {
+      "type": "string"
+    },
+    "address_line2": {
+      "type": "string"
+    },
+    "address_city": {
+      "type": "string"
+    },
+    "address_county": {
+      "type": "string"
+    },
+    "address_postal_code": {
+      "type": "string"
+    },
+    "address_iso_country": {
+      "type": "string"
+    },
+    "address_start_date": {
+      "type": "string"
+    },
+    "address_end_date": {
+      "type": "string"
+    }
+  }
+}

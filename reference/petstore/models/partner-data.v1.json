@@ -1,0 +1,69 @@
+{
+  "title": "partner-data",
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string",
+      "description": "Allowed Values: partner"
+    },
+    "type": {
+      "type": "string",
+      "description": "Allowed Values: individual, company"
+    },
+    "category": {
+      "type": "string",
+      "description": "Allowed Values: proptech, agency, landlord, buy-to-let, builder"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "middle_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "date_of_birth": {
+      "type": "string"
+    },
+    "country_of_birth": {
+      "type": "string"
+    },
+    "country_of_residence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "nationality": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "landline": {
+      "type": "string"
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "address": {
+      "$ref": "./address.v1.json"
+    },
+    "address_history": {
+      "$ref": "./address_history.v1.json"
+    },
+    "payment": {
+      "$ref": "./payment.v1.json"
+    },
+    "license": {
+      "type": "string"
+    },
+    "date_onboarded": {
+      "type": "string"
+    }
+  }
+}

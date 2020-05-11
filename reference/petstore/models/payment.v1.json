@@ -1,0 +1,27 @@
+{
+  "title": "payment",
+  "type": "object",
+  "properties": {
+    "payment_method": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "uk_account_number": {
+      "type": "string"
+    },
+    "uk_sort_code": {
+      "type": "string"
+    },
+    "bic_swift": {
+      "type": "string"
+    },
+    "iban": {
+      "type": "string"
+    },
+    "reference": {
+      "type": "string"
+    }
+  }
+}

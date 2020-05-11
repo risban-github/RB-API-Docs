@@ -2,8 +2,10 @@ openapi: 3.0.0
 info:
   version: 1.0.0
   title: Risban API Reference Docs
-  license: {}
-  description: ''
+  license:
+    name: MIT
+    url: url
+  description: This section will provide you with all APIs that you can use to integrate your system.
   contact:
     name: Rakesh
     email: rakesh@risban.com
@@ -15,83 +17,9 @@ servers:
   - url: 'https://risban.com/api/v1'
     description: Live
 paths:
-  /pets:
-    get:
-      summary: List all pets
-      operationId: listPets
-      tags:
-        - pets
-      parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: A paged array of pets
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: ./models/pet.v1.yaml
-              examples:
-                example-1: {}
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: ../common/models/error.v1.yaml
-    post:
-      summary: Create a pet
-      operationId: createPets
-      tags:
-        - pets
-      responses:
-        '201':
-          description: Null response
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: ../common/models/error.v1.yaml
-  '/pets/{petId}':
-    get:
-      summary: Info for a specific pet
-      operationId: showPetById
-      tags:
-        - pets
-      parameters:
-        - name: petId
-          in: path
-          required: true
-          description: The id of the pet to retrieve
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: ./models/pet.v1.yaml
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: ../common/models/error.v1.yaml
   /user/login:
     post:
-      summary: User login
+      summary: 2. User Login
       operationId: post-user-login
       responses:
         '200':
@@ -101,7 +29,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  '':
+                  'A ':
                     $ref: ./models/login.v1.yaml
       description: "This is an API to login using registered email and password. \n\nOn successful validation of your email and password, Risban generates access_token which you need to put in the header to use other APIs."
       requestBody:
@@ -124,20 +52,33 @@ paths:
                 - password
       tags:
         - Users
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer {{access_token}}'
+      security: []
   /user/me:
     get:
-      summary: Your GET endpoint
-      tags: []
+      summary: 3.1 User - retrieve my user info
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
+                $ref: ./models/user-me.v1.yaml
+        '':
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  '':
-                    $ref: ./models/user-me.v1.yaml
+                  meta:
+                    $ref: ./models/meta.v1.yaml
+              examples:
+                example-1: {}
       operationId: get-user-me
       description: Get own detail after login
       parameters:
@@ -149,18 +90,158 @@ paths:
           description: 'Bearer {{access_token}}'
           required: true
           style: 'Bearer {{access_token}}'
+      tags:
+        - Users
+      security: []
+    put:
+      summary: 3.2 User - update my user info
+      operationId: put-user-me
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/user-me.v1.yaml
+      description: Update personal information
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                first_name:
+                  type: string
+                middle_name:
+                  type: string
+                last_name:
+                  type: string
+                phone:
+                  type: string
+            examples:
+              example-1: {}
+        description: ''
+      tags:
+        - Users
+    delete:
+      summary: 3.3 User - delete my user info
+      operationId: delete-user-me
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/user-me.v1.yaml
+      description: 'This will inactivate user account. '
+      tags:
+        - Users
+  /user/logout:
+    post:
+      summary: 4. Logout
+      operationId: post-user-logout
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: ./models/meta.v1.yaml
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: 'Bearer {{access_token}}'
+      tags:
+        - Users
+      description: 'user logout '
+  /user/signup:
+    post:
+      summary: 1. User Sign-in
+      operationId: post-user-signup
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Users
+      description: sign up user
+  /partners:
+    get:
+      summary: 2. Retrieve partner info
+      tags:
+        - partners
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: ./models/meta.v1.yaml
+                  data:
+                    $ref: ./models/partner-data.v1.json
+      operationId: get-partners
+      description: Retrieve partner information
+    post:
+      summary: 1. Create a partner
+      operationId: post-partners
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: ./models/meta.v1.yaml
+                  data:
+                    $ref: ./models/partner-data.v1.json
+      description: Onboard as a partner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/partner-data.v1.json
+      tags:
+        - partners
+    put:
+      summary: 3. Update a partner
+      operationId: put-partners
+      responses:
+        '200':
+          description: OK
+      tags:
+        - partners
+      description: partner update
+    delete:
+      summary: 4. Delete a partner
+      operationId: delete-partners
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: ./models/meta.v1.yaml
+                  data:
+                    type: string
+      tags:
+        - partners
+      description: delete a partner
+    parameters: []
 components:
-  schemas:
-    Pets:
-      type: array
-      items:
-        $ref: ./models/pet.v1.yaml
-      x-tags:
-        - Pets
-      title: Pets
-      description: A list of pets.
-  securitySchemes:
-    API Key - 1:
-      name: API Key
-      type: apiKey
-      in: query
+  schemas: {}
+  securitySchemes: {}
